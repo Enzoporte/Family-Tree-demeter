@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Library;
+
 
 namespace Program
 {
@@ -7,14 +9,20 @@ namespace Program
     {
         static void Main(string[] args)
         {
-            Node n1 = new Node(1);
-            Node n2 = new Node(2);
-            Node n3 = new Node(3);
-            Node n4 = new Node(4);
-            Node n5 = new Node(5);
-            Node n6 = new Node(6);
-            Node n7 = new Node(7);
+            HijoMayorVisitor MayorVisitor = new HijoMayorVisitor();
+            SumarEdadVisitor SumVisitor = new SumarEdadVisitor();
+            NombreLargoVisitor NombreLargoVisitor = new NombreLargoVisitor(); 
 
+            Node n1 = new Node("Enzo", 70);
+            Node n2 = new Node("Enzuli", 50);
+            Node n3 = new Node("Enzalada", 48);
+            Node n4 = new Node("Enzoporte", 30);
+            Node n5 = new Node("Renzo", 29);
+            Node n6 = new Node("EnzoCantina", 25);
+            Node n7 = new Node("EnzoCantante", 18);
+            List<Node> NodeList = new List<Node> {n1, n2, n3, n4, n5, n6, n7};
+
+            
             n1.AddChildren(n2);
             n1.AddChildren(n3);
 
@@ -24,6 +32,19 @@ namespace Program
             n3.AddChildren(n6);
             n3.AddChildren(n7);
 
+            foreach (var node in NodeList)
+            {
+                node.Accept(SumVisitor);
+                node.Accept(MayorVisitor);
+                node.Accept(NombreLargoVisitor);
+            }
+            Console.WriteLine(SumVisitor.SumaTotal);
+            Console.WriteLine(NombreLargoVisitor.NombreLargo.Nombre);
+            
+            foreach (var item in MayorVisitor.MayorPorGeneracion)
+            {
+                Console.WriteLine(item.Nombre + ", Edad: " + item.Edad);           
+            }
             // visitar el árbol aquí
         }
     }

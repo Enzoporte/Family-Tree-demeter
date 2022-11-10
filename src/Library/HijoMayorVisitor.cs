@@ -6,31 +6,25 @@ namespace Library
     public class HijoMayorVisitor : IVisitor
     {
         public Person Mayor { get; set; }
-        public List<Person> MayorPorGeneracion { get; set; }
-        public HijoMayorVisitor()
-        {
-            MayorPorGeneracion = new List<Person>();
-        }
+
         public void Visit(Node node)
         {
+            if (node.Children.Count != 0) return;
+
             try
             {
-                Mayor = node.Children[0].Person;
-            }
-            catch (System.ArgumentOutOfRangeException)
-            {
-                return;
-            }
-
-            foreach (var child in node.Children)
-            {
-                if (child.Person.Edad > Mayor.Edad)
+                if (node.Person.Edad > Mayor.Edad)
                 {
-                    Mayor = child.Person;
+                    Mayor = node.Person;
                 }
             }
+            catch (System.NullReferenceException)
+            {
+                Mayor = node.Person;
+            }
 
-            MayorPorGeneracion.Add(Mayor);
+            
+
         }
     }
 }

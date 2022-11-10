@@ -46,11 +46,9 @@ namespace Program
 
             Console.WriteLine(SumVisitor.SumaTotal);
             Console.WriteLine(NombreLargoVisitor.NombreLargo.Nombre);
+            Console.WriteLine(MayorVisitor.Mayor.Nombre + ", Edad: " + MayorVisitor.Mayor.Edad);
+
             
-            foreach (var item in MayorVisitor.MayorPorGeneracion)
-            {
-                Console.WriteLine(item.Nombre + ", Edad: " + item.Edad);           
-            }
         }
     }
 }
